@@ -1,5 +1,9 @@
 
 import React, { useState, useEffect } from 'react';
+import FlagName from './pages/FlagName.js';
+import NameCapital from './pages/NameCapital.js';
+import NameRegion from './pages/NameRegion.js';
+import NameCurrency from './pages/NameCurrency.js';
 const { chooseRandomItems } = require('./utils/gameLogic.js');
 
 function App() {
@@ -30,12 +34,41 @@ function App() {
 
   }, [totalTries,optionsNumber])
   
-  const handleVerification = ()=>{
+  const handleVerification = (flag)=>{
     setTotalTries((prev)=>prev+1)
-    if (userSelected === itemsSelected[solution].name.common) {
-      setScore((prev)=>prev+1)
+
+    console.log("flag",flag)
+
+    if (flag === 'FlagName') {
+      if (userSelected.name.common === itemsSelected[solution].name.common) {
+        setScore((prev)=>prev+1)
+      } 
+      
+    } else if( flag === 'NameCapital'){
+      if (userSelected.name.common === itemsSelected[solution].name.common) {
+        setScore((prev)=>prev+1)
+      }
+    } else if (flag === 'NameRegion') {
+
+      // itemsSelected[solution].region
+      if (itemsSelected[solution].region===userSelected) {
+        setScore((prev)=>prev+1)
+      }
+    } else if (flag === 'NameCurrency') {
+
+
+
+      if (itemsSelected[solution]["currencies"] === null || itemsSelected[solution]["currencies"] === undefined ||  Object.keys(itemsSelected[solution]["currencies"]).length === 0  ) {
+        if (userSelected === "None") setScore((prev)=>prev+1)
+      } else  {
+
+        if (itemsSelected[solution]["currencies"][Object.keys(itemsSelected[solution]["currencies"])[0]]?.name) {
+          if(itemsSelected[solution]["currencies"][Object.keys(itemsSelected[solution]["currencies"])[0]]["name"] === userSelected)  setScore((prev)=>prev+1) 
+        }
+        
+      }
     }
-    return userSelected === itemsSelected[solution].name.common
+
   }
 
   const handleSelectChange = (event) => {
@@ -60,27 +93,10 @@ function App() {
         :
           <div className="border-8 rounded-2xl border-y-red-500 shadow-2xl w-1/2 h-3/4 px-4 py-2 border-x-amber-400 flex flex-col">
             
-            <div className="h-1/2  flex justify-center my-5">
-              <img className=' border-2' src={itemsSelected[solution]?.flags.svg} alt="flag"></img>
-            </div>
-            
-            <div className="h-1/2 border-t-2 flex flex-col justify-around">
-              <div className="flex md:flex-row flex-col gap-1 justify-around columns-3">
-                {
-                  itemsSelected.map((item,index)=>(
-                    <div key={item.name.official} className="flex items-center">
-                        <input id={item.name.common} onClick={(e)=>setUserSelected(e.target.value)} type="radio" value={item.name.common} name="default-radio" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                        <label htmlFor={item.name.common} className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{item.name.common}</label>
-                    </div>
-
-                  ))
-                }
-              </div>
-              <div className="flex justify-center items-end">
-                <button onClick={handleVerification} className='px-6 py-2 font-semibold text-white border-b-4 rounded shadow-lg bg-cyan-500 border-cyan-800 shadow-cyan-600/50 hover:border-cyan-600'>check</button>
-              </div>
-            </div>  
-
+            <FlagName itemsSelected={itemsSelected} solution={solution} setUserSelected={setUserSelected} handleVerification={handleVerification}  />
+            {/* <NameCapital itemsSelected={itemsSelected} solution={solution} setUserSelected={setUserSelected} handleVerification={handleVerification}  /> */}
+            {/* <NameRegion itemsSelected={itemsSelected} solution={solution} setUserSelected={setUserSelected} handleVerification={handleVerification}  /> */}
+            {/* <NameCurrency itemsSelected={itemsSelected} solution={solution} setUserSelected={setUserSelected} handleVerification={handleVerification}  /> */}
           </div>
       
         }
