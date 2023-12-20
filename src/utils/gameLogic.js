@@ -30,17 +30,13 @@ async function getOptions(apiData,optionsNumber) {
 
 
 async function chooseRandomItems (optionsNumber) {
-
-
     apiData = await fetchData()
-
     options = await getOptions(apiData,optionsNumber)
 
     const result = {
         selectedItems: options,
         randomForSolution: Math.floor(Math.random()*options?.length)        
     }
-    console.log("1111144111",result)
 
     return result
 }

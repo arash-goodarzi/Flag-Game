@@ -4,6 +4,11 @@ module.exports = {
   theme: {
     extend: {},
   },
+  variants: {
+    extend: {
+      cursor: ['group-hover'],
+    },
+  },
   plugins: [],
 }
 
