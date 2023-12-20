@@ -78,7 +78,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Layout Score={Score} totalTries={totalTries} itemsSelected={itemsSelected} handleRestartGame={handleRestartGame} handleSelectChange={handleSelectChange}  />}>
-          <Route index element={<FlagName itemsSelected={itemsSelected} solution={solution} setUserSelected={setUserSelected} handleVerification={handleVerification}  />} />
+          <Route path="flag-game"  element={<FlagName itemsSelected={itemsSelected} solution={solution} setUserSelected={setUserSelected} handleVerification={handleVerification}  />} />
           <Route path='namecapital' element={<NameCapital itemsSelected={itemsSelected} solution={solution} setUserSelected={setUserSelected} handleVerification={handleVerification}  />} />
           <Route path='namecurrency' element={<NameCurrency itemsSelected={itemsSelected} solution={solution} setUserSelected={setUserSelected} handleVerification={handleVerification}  />} />
           <Route path='nameregion' element={<NameRegion itemsSelected={itemsSelected} solution={solution} setUserSelected={setUserSelected} handleVerification={handleVerification}  />} />
