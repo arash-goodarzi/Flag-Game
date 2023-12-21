@@ -23,7 +23,6 @@ function App() {
 
       setItemsSelected(selectedItems)
       setSolution(randomForSolution)
-
     }
 
     loadingFromApi()
@@ -62,7 +61,6 @@ function App() {
         
       }
     }
-
   }
 
   const handleSelectChange = (event) => {

@@ -2,12 +2,18 @@
 import getData from "./connectToAPI";
 
 let apiData=[];
-let options= []
-const fetchData = async () => {
-    const data = await getData();
-    return data
-};
+let options= [];
+let cachedData = null;
 
+async function fetchData() {
+    if (cachedData) {
+      return cachedData;
+    } else {
+      const data = await getData();
+      cachedData = data;
+      return data;
+    }
+  }
 
 async function chooseRandomItem (sourceList) {
     const randomNumber = Math.floor(Math.random()*sourceList?.length)
@@ -16,29 +22,36 @@ async function chooseRandomItem (sourceList) {
 }
 
 async function getOptions(apiData,optionsNumber) {
-    let result = []
-    while (result?.length < optionsNumber) {
-
-        const item = await chooseRandomItem(apiData)
-        const exist = await result.some(i =>i.name.common === item.name.common )
-        if (!exist) {
-            result.push(item)
+    try {
+        let result = []
+        while (result?.length < optionsNumber) {
+    
+            const item = await chooseRandomItem(apiData)
+            const exist = await result.some(i =>i.name.common === item.name.common )
+            if (!exist) {
+                result.push(item)
+            }
         }
-    }
-    return result    
+        return result    
+    } catch (error) {
+        throw new Error("connection is weak!")
+    } 
 }
 
 
 async function chooseRandomItems (optionsNumber) {
-    apiData = await fetchData()
-    options = await getOptions(apiData,optionsNumber)
-
-    const result = {
-        selectedItems: options,
-        randomForSolution: Math.floor(Math.random()*options?.length)        
+    try {
+        apiData = await fetchData()
+        options = await getOptions(apiData,optionsNumber)
+    
+        const result = {
+            selectedItems: options,
+            randomForSolution: Math.floor(Math.random()*options?.length)        
+        }
+        return result
+    } catch (error) {
+        throw new Error("connection is weak!")
     }
-
-    return result
 }
 
 export  {chooseRandomItems}
