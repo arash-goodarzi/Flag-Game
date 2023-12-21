@@ -8,9 +8,9 @@ const NameCapital = ({itemsSelected, solution, setUserSelected, handleVerificati
                     {itemsSelected[solution]?.name?.common}
             </div>
             <div className="">
-                <img className='border-2 max-w-full max-h-full landscape:w-24' src={itemsSelected[solution]?.flags.svg} alt="flag"></img>
+                <img className='max-w-full max-h-full landscape:w-24 h-full' src={itemsSelected[solution]?.flags.svg} alt="flag"></img>
             </div>
-        </div>
+        </div> 
         
         <div className="h-3/5 border-t-2 flex flex-col justify-around">
             <div className="gap-1 justify-around flex flex-col 3xl:flex-row lg:grid lg:grid-cols-2 landscape:flex-row">
