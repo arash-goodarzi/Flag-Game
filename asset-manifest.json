@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/flag-game/static/css/main.ea515825.css",
+    "main.js": "/flag-game/static/js/main.6d6255c8.js",
+    "static/js/787.d42c9c92.chunk.js": "/flag-game/static/js/787.d42c9c92.chunk.js",
+    "index.html": "/flag-game/index.html",
+    "main.ea515825.css.map": "/flag-game/static/css/main.ea515825.css.map",
+    "main.6d6255c8.js.map": "/flag-game/static/js/main.6d6255c8.js.map",
+    "787.d42c9c92.chunk.js.map": "/flag-game/static/js/787.d42c9c92.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ea515825.css",
+    "static/js/main.6d6255c8.js"
+  ]
+}
